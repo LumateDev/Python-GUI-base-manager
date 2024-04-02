@@ -20,13 +20,13 @@ from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QFr
     QPushButton, QSizePolicy, QSpinBox, QTabWidget,
     QTableWidget, QTableWidgetItem, QWidget)
 
-class Ui_DB_app(object):
-    def setupUi(self, DB_app):
-        if not DB_app.objectName():
-            DB_app.setObjectName(u"DB_app")
-        DB_app.resize(957, 840)
-        DB_app.setAutoFillBackground(False)
-        DB_app.setStyleSheet(u"QWidget {\n"
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        if not MainWindow.objectName():
+            MainWindow.setObjectName(u"MainWindow")
+        MainWindow.resize(957, 840)
+        MainWindow.setAutoFillBackground(False)
+        MainWindow.setStyleSheet(u"QWidget {\n"
 "background-color: #4D606E;\n"
 "}\n"
 "\n"
@@ -72,14 +72,14 @@ class Ui_DB_app(object):
 "\n"
 "\n"
 "#result_frame {\n"
-"	border-radius: 5px;\n"
+"\n"
 "	background-color: #D3D4D8;\n"
 "}\n"
 "\n"
 "QHeaderView::section{\n"
 "	border: none;\n"
-"	border"
-                        "-bottom:1px solid black;\n"
+"	border-bottom:1px solid bl"
+                        "ack;\n"
 "	text-align:left;\n"
 "	padding: 3px 5px;\n"
 "}\n"
@@ -113,8 +113,8 @@ class Ui_DB_app(object):
 "\n"
 "\n"
 "")
-        DB_app.setTabShape(QTabWidget.Rounded)
-        self.centralwidget = QWidget(DB_app)
+
+        self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.title_frame = QFrame(self.centralwidget)
         self.title_frame.setObjectName(u"title_frame")
@@ -138,28 +138,37 @@ class Ui_DB_app(object):
         self.info_frame.setStyleSheet(u"")
         self.info_frame.setFrameShape(QFrame.StyledPanel)
         self.info_frame.setFrameShadow(QFrame.Raised)
-        self.comboBox_4 = QComboBox(self.info_frame)
-        self.comboBox_4.setObjectName(u"comboBox_4")
-        self.comboBox_4.setGeometry(QRect(670, 20, 241, 41))
+        self.comboBoxDifficult = QComboBox(self.info_frame)
+        self.comboBoxDifficult.addItem("")
+        self.comboBoxDifficult.addItem("")
+        self.comboBoxDifficult.addItem("")
+        self.comboBoxDifficult.addItem("")
+        self.comboBoxDifficult.setObjectName(u"comboBoxDifficult")
+        self.comboBoxDifficult.setGeometry(QRect(670, 20, 241, 41))
         self.label_2 = QLabel(self.info_frame)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(60, 20, 120, 40))
-        self.spinBox = QSpinBox(self.info_frame)
-        self.spinBox.setObjectName(u"spinBox")
-        self.spinBox.setGeometry(QRect(190, 20, 240, 40))
-        self.comboBox = QComboBox(self.info_frame)
-        self.comboBox.setObjectName(u"comboBox")
-        self.comboBox.setGeometry(QRect(670, 70, 241, 41))
+        self.spinBoxId = QSpinBox(self.info_frame)
+        self.spinBoxId.setObjectName(u"spinBoxId")
+        self.spinBoxId.setGeometry(QRect(190, 20, 240, 40))
+        self.comboBoxTheme = QComboBox(self.info_frame)
+        self.comboBoxTheme.addItem("")
+        self.comboBoxTheme.addItem("")
+        self.comboBoxTheme.setObjectName(u"comboBoxTheme")
+        self.comboBoxTheme.setGeometry(QRect(670, 70, 241, 41))
         self.label_5 = QLabel(self.info_frame)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setGeometry(QRect(510, 20, 131, 40))
         self.label_6 = QLabel(self.info_frame)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(40, 70, 131, 40))
-        self.comboBox_5 = QComboBox(self.info_frame)
-        self.comboBox_5.setObjectName(u"comboBox_5")
-        self.comboBox_5.setGeometry(QRect(190, 70, 240, 40))
-        self.comboBox_5.setIconSize(QSize(16, 16))
+        self.comboBoxType = QComboBox(self.info_frame)
+        self.comboBoxType.addItem("")
+        self.comboBoxType.addItem("")
+        self.comboBoxType.addItem("")
+        self.comboBoxType.setObjectName(u"comboBoxType")
+        self.comboBoxType.setGeometry(QRect(190, 70, 240, 40))
+        self.comboBoxType.setIconSize(QSize(16, 16))
         self.label_task_text = QLabel(self.info_frame)
         self.label_task_text.setObjectName(u"label_task_text")
         self.label_task_text.setGeometry(QRect(29, 140, 141, 40))
@@ -285,7 +294,7 @@ class Ui_DB_app(object):
         self.tableWidget.setLayoutDirection(Qt.LeftToRight)
         self.tableWidget.setAutoFillBackground(False)
         self.tableWidget.setStyleSheet(u"")
-        self.tableWidget.setFrameShape(QFrame.Panel)
+        self.tableWidget.setFrameShape(QFrame.NoFrame)
         self.tableWidget.setFrameShadow(QFrame.Sunken)
         self.tableWidget.setLineWidth(1)
         self.tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
@@ -306,66 +315,78 @@ class Ui_DB_app(object):
         self.tableWidget.verticalHeader().setHighlightSections(True)
         self.tableWidget.verticalHeader().setProperty("showSortIndicator", False)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-        DB_app.setCentralWidget(self.centralwidget)
+
         self.function_frame.raise_()
         self.title_frame.raise_()
         self.info_frame.raise_()
         self.result_frame.raise_()
 
-        self.retranslateUi(DB_app)
+        self.retranslateUi(MainWindow)
 
-        QMetaObject.connectSlotsByName(DB_app)
+        QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
-    def retranslateUi(self, DB_app):
-        DB_app.setWindowTitle(QCoreApplication.translate("DB_app", u"MainWindow", None))
-        self.title_label.setText(QCoreApplication.translate("DB_app", u"\u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f \u043e \u0437\u0430\u0434\u0430\u0447\u0430\u0445", None))
-        self.label_2.setText(QCoreApplication.translate("DB_app", u"Id \u0437\u0430\u0434\u0430\u0447\u0438", None))
-        self.label_5.setText(QCoreApplication.translate("DB_app", u"\u0421\u043b\u043e\u0436\u043d\u043e\u0441\u0442\u044c", None))
-        self.label_6.setText(QCoreApplication.translate("DB_app", u"\u0422\u0438\u043f \u0437\u0430\u0434\u0430\u0447\u0438", None))
-        self.label_task_text.setText(QCoreApplication.translate("DB_app", u"\u0422\u0435\u043a\u0441\u0442 \u0437\u0430\u0434\u0430\u0447\u0438", None))
-        self.label_3.setText(QCoreApplication.translate("DB_app", u"\u0422\u0435\u043c\u0430 \u0437\u0430\u0434\u0430\u0447\u0438", None))
-        self.add_btn.setText(QCoreApplication.translate("DB_app", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c", None))
-        self.update_btn.setText(QCoreApplication.translate("DB_app", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c", None))
-        self.select_btn.setText(QCoreApplication.translate("DB_app", u"\u0412\u044b\u0431\u0440\u0430\u0442\u044c", None))
-        self.search_btn.setText(QCoreApplication.translate("DB_app", u"\u041d\u0430\u0439\u0442\u0438", None))
-        self.clear_btn.setText(QCoreApplication.translate("DB_app", u"\u041e\u0447\u0438\u0441\u0442\u0438\u0442\u044c", None))
-        self.remove_btn.setText(QCoreApplication.translate("DB_app", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.title_label.setText(QCoreApplication.translate("MainWindow", u"\u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f \u043e \u0437\u0430\u0434\u0430\u0447\u0430\u0445", None))
+        self.comboBoxDifficult.setItemText(0, QCoreApplication.translate("MainWindow", u"\u041b\u0435\u0433\u043a\u043e", None))
+        self.comboBoxDifficult.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u044f\u044f", None))
+        self.comboBoxDifficult.setItemText(2, QCoreApplication.translate("MainWindow", u"\u0421\u043b\u043e\u0436\u043d\u0430\u044f", None))
+        self.comboBoxDifficult.setItemText(3, QCoreApplication.translate("MainWindow", u"\u0425\u0430\u0440\u0434", None))
+
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Id \u0437\u0430\u0434\u0430\u0447\u0438", None))
+        self.comboBoxTheme.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043c\u0430 1", None))
+        self.comboBoxTheme.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043c\u0430 2", None))
+
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043b\u043e\u0436\u043d\u043e\u0441\u0442\u044c", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0438\u043f \u0437\u0430\u0434\u0430\u0447\u0438", None))
+        self.comboBoxType.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0414\u043e\u043c\u0430\u0448\u043dee \u0437\u0430\u0434\u0430\u043d\u0438\u0435", None))
+        self.comboBoxType.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0421\u0430\u043c\u043e\u0441\u0442\u043e\u044f\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0440\u0430\u0431\u043e\u0442\u0430", None))
+        self.comboBoxType.setItemText(2, QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043d\u0442\u0440\u043e\u043b\u044c\u043d\u0430\u044f \u0440\u0430\u0431\u043e\u0442\u0430", None))
+
+        self.label_task_text.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043a\u0441\u0442 \u0437\u0430\u0434\u0430\u0447\u0438", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043c\u0430 \u0437\u0430\u0434\u0430\u0447\u0438", None))
+        self.add_btn.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c", None))
+        self.update_btn.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c", None))
+        self.select_btn.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0440\u0430\u0442\u044c", None))
+        self.search_btn.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0439\u0442\u0438", None))
+        self.clear_btn.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0447\u0438\u0441\u0442\u0438\u0442\u044c", None))
+        self.remove_btn.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("DB_app", u"Id \u0417\u0430\u0434\u0430\u0447\u0438", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Id \u0417\u0430\u0434\u0430\u0447\u0438", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("DB_app", u"\u0422\u0435\u043c\u0430 \u0437\u0430\u0434\u0430\u0447\u0438", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043c\u0430 \u0437\u0430\u0434\u0430\u0447\u0438", None));
         ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("DB_app", u"\u0421\u043b\u043e\u0436\u043d\u043e\u0441\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0438", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043b\u043e\u0436\u043d\u043e\u0441\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0438", None));
         ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("DB_app", u"\u0422\u0438\u043f \u0437\u0430\u0434\u0430\u0447\u0438", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0438\u043f \u0437\u0430\u0434\u0430\u0447\u0438", None));
         ___qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("DB_app", u"\u0422\u0435\u043a\u0441\u0442 \u0437\u0430\u0434\u0430\u0447\u0438", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043a\u0441\u0442 \u0437\u0430\u0434\u0430\u0447\u0438", None));
         ___qtablewidgetitem5 = self.tableWidget.verticalHeaderItem(0)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("DB_app", u"\u041d\u043e\u0432\u0430\u044f \u0441\u0442\u0440\u043e\u043a\u0430", None));
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"\u041d\u043e\u0432\u0430\u044f \u0441\u0442\u0440\u043e\u043a\u0430", None));
         ___qtablewidgetitem6 = self.tableWidget.verticalHeaderItem(1)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("DB_app", u"\u041d\u043e\u0432\u0430\u044f \u0441\u0442\u0440\u043e\u043a\u0430", None));
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"\u041d\u043e\u0432\u0430\u044f \u0441\u0442\u0440\u043e\u043a\u0430", None));
 
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
         ___qtablewidgetitem7 = self.tableWidget.item(0, 0)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("DB_app", u"fdfd", None));
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"fdfd", None));
         ___qtablewidgetitem8 = self.tableWidget.item(0, 1)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("DB_app", u"fdfd", None));
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"fdfd", None));
         ___qtablewidgetitem9 = self.tableWidget.item(0, 2)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("DB_app", u"fdfd", None));
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"fdfd", None));
         ___qtablewidgetitem10 = self.tableWidget.item(0, 3)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("DB_app", u"fdfdf", None));
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"fdfdf", None));
         ___qtablewidgetitem11 = self.tableWidget.item(0, 4)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("DB_app", u"fdfdf", None));
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"fdfdf", None));
         ___qtablewidgetitem12 = self.tableWidget.item(1, 0)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("DB_app", u"54", None));
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"54", None));
         ___qtablewidgetitem13 = self.tableWidget.item(1, 1)
-        ___qtablewidgetitem13.setText(QCoreApplication.translate("DB_app", u"gdfg", None));
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"gdfg", None));
         ___qtablewidgetitem14 = self.tableWidget.item(1, 2)
-        ___qtablewidgetitem14.setText(QCoreApplication.translate("DB_app", u"gdgfdg", None));
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"gdgfdg", None));
         ___qtablewidgetitem15 = self.tableWidget.item(1, 3)
-        ___qtablewidgetitem15.setText(QCoreApplication.translate("DB_app", u"gdfgd", None));
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"gdfgd", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
 #if QT_CONFIG(statustip)

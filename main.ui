@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DB_app</class>
- <widget class="QMainWindow" name="DB_app">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -63,7 +63,7 @@ border-radius: 12px;
 
 
 #result_frame {
-	border-radius: 5px;
+
 	background-color: #D3D4D8;
 }
 
@@ -172,7 +172,7 @@ border :2px solid black;
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QComboBox" name="comboBox_4">
+    <widget class="QComboBox" name="comboBoxDifficult">
      <property name="geometry">
       <rect>
        <x>670</x>
@@ -181,6 +181,26 @@ border :2px solid black;
        <height>41</height>
       </rect>
      </property>
+     <item>
+      <property name="text">
+       <string>Легко</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Средняя</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Сложная</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Хард</string>
+      </property>
+     </item>
     </widget>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
@@ -195,7 +215,7 @@ border :2px solid black;
       <string>Id задачи</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="spinBox">
+    <widget class="QSpinBox" name="spinBoxId">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -205,7 +225,7 @@ border :2px solid black;
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="comboBoxTheme">
      <property name="geometry">
       <rect>
        <x>670</x>
@@ -214,6 +234,16 @@ border :2px solid black;
        <height>41</height>
       </rect>
      </property>
+     <item>
+      <property name="text">
+       <string>Тема 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Тема 2</string>
+      </property>
+     </item>
     </widget>
     <widget class="QLabel" name="label_5">
      <property name="geometry">
@@ -241,7 +271,7 @@ border :2px solid black;
       <string>Тип задачи</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_5">
+    <widget class="QComboBox" name="comboBoxType">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -256,6 +286,21 @@ border :2px solid black;
        <height>16</height>
       </size>
      </property>
+     <item>
+      <property name="text">
+       <string>Домашнee задание</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Самостоятельная работа</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Контрольная работа</string>
+      </property>
+     </item>
     </widget>
     <widget class="QLabel" name="label_task_text">
      <property name="geometry">
@@ -509,7 +554,7 @@ border :2px solid black;
       <string notr="true"/>
      </property>
      <property name="frameShape">
-      <enum>QFrame::Panel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Sunken</enum>
