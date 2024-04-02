@@ -1,33 +1,29 @@
 import sys
-from PySide6.QtGui import QIntValidator
+
 from PySide6.QtWidgets import QWidget, QApplication, QPushButton, QFrame, QMessageBox, QTableWidgetItem
+from PySide6.QtGui import QIcon
 
 import database_manager
-import main_ui
 from main_ui import Ui_MainWindow
-from database_manager import *
 
 
 class MainWindow(QWidget):
 
     def __init__(self):
-        """
-        Function which initialize window
-        Args: none
-        Return: none
-        """
         super().__init__()
+        icon = QIcon("./icons/title_icon.svg")
+        self.setWindowIcon(icon)
+        self.setFixedSize(960, 810)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        #Тут описать БД
-        #self.db = database_manager.connection(connection)
 
+        self.connect = database_manager.sql_connection()
         self.task_id = self.ui.spinBoxId
-        #self.task_id.setValidator(QIntValidator)
         self.task_type = self.ui.comboBoxType
         self.task_difficult = self.ui.comboBoxDifficult
         self.task_theme = self.ui.comboBoxTheme
+        self.task_text = self.ui.plainTextEdit
 
         self.button_add = self.ui.add_btn
         self.button_update = self.ui.update_btn
@@ -41,13 +37,10 @@ class MainWindow(QWidget):
         self.buttons_list = self.ui.function_frame.findChildren(QPushButton)
 
         self.init_signal_slot()
-        # Loading data with open App
         self.search_info()
         self.update_info()
 
-
     def init_signal_slot(self):
-        #connect buttons to their functions
         self.button_add.clicked.connect(self.add_info)
         self.button_update.clicked.connect(self.update_info)
         self.button_select.clicked.connect(self.select_info)
@@ -58,26 +51,32 @@ class MainWindow(QWidget):
     def update_info(self):
         print("Update button clicked")
 
-
-
     def add_info(self):
+        table_name = 'Новая_таблица'
+        column_names = ['Имя', 'Возраст', 'Город']
+        data_types = ['text', 'integer', 'text']
         print("Add button clicked")
-        print(f"Data: {self.task_id.value()}, {self.task_type}, {self.task_theme}, {self.task_difficult}")
+        print(
+            f"Data: {self.task_id.value()}, {self.task_type.currentText()}, {self.task_theme.currentText()}, {self.task_difficult.currentText()}, {self.task_text.toPlainText()}")
+
+        database_manager.create_tables(self.connect, table_name, column_names, data_types)
 
     def search_info(self):
         print("Search button clicked")
 
     def clear_form_info(self):
         print("Clear button clicked")
+
     def select_info(self):
         print("Select button clicked")
+
     def delete_info(self):
         print("Delete button clicked")
 
 
-
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setStyle("Fusion")
     window = MainWindow()
     window.show()
     sys.exit(app.exec())

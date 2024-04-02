@@ -17,89 +17,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-background-color: #4D606E;
-}
-
-#title_frame QFrame {
-background-color: #D3D4D8;
-border-radius:12px;
-}
-
-#title_frame QLabel{
-color: #000;
-font:30px;
-}
-
-#info_frame  {
-background-color : #D3D4D8;
-border-radius: 12px;
-}
-#info_frame QLabel  {
-background-color : #D3D4D8;
-color: #000;
-font:24px;
-}
-#info_frame QComboBox, #info_frame QSpinBox, #info_frame QPlainTextEdit, #info_frame gridLayout_7{
-  
-  background-color: #D3D4D8;
-  border: 2px solid #000;
-  color: #000;
-  border-radius: 6px;
-  font: 24px;
- 
-}
-
-#function_frame {
-background-color : #D3D4D8;
-border-radius: 12px;
-}
-#info_frame QSpinBox:focus,
-#info_frame QComboBox:focus,
-#info_frame QPlainTextEdit:focus
- {
-	border-color: #4c96f7;
-}
-
-
-#result_frame {
-
-	background-color: #D3D4D8;
-}
-
-QHeaderView::section{
-	border: none;
-	border-bottom:1px solid black;
-	text-align:left;
-	padding: 3px 5px;
-}
-
-QTableWidget::Item{
-	border-bottom:1px solid black;
-border-right:1px solid black;
-	color: black;
-	padding-left: 3px;
-}
-QTableWidget{
-background-color :#D3D4D8;
-border-radius:4px;
-border :2px solid black;
-}
-#function_frame QPushButton {
-	font-size: 14px;
-	padding: 5px 10px;
-	border: 2px solid #000;
-	border-radius: 5px;
-	background-color: transparent;
-}
-
-#function_frame QPushButton:hover {
-	border-color: #4c96f7;
-
-
-
-}
-
+   <string notr="true">
 
 
 </string>
@@ -138,7 +56,7 @@ border :2px solid black;
      <property name="font">
       <font>
        <family>Microsoft YaHei</family>
-       <pointsize>-1</pointsize>
+       <pointsize>28</pointsize>
        <italic>false</italic>
        <bold>false</bold>
       </font>
@@ -173,6 +91,9 @@ border :2px solid black;
      <enum>QFrame::Raised</enum>
     </property>
     <widget class="QComboBox" name="comboBoxDifficult">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>670</x>
@@ -180,6 +101,14 @@ border :2px solid black;
        <width>241</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
      </property>
      <item>
       <property name="text">
@@ -205,11 +134,16 @@ border :2px solid black;
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>60</x>
+       <x>29</x>
        <y>20</y>
-       <width>120</width>
+       <width>151</width>
        <height>40</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Id задачи</string>
@@ -224,6 +158,11 @@ border :2px solid black;
        <height>40</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
     </widget>
     <widget class="QComboBox" name="comboBoxTheme">
      <property name="geometry">
@@ -233,6 +172,11 @@ border :2px solid black;
        <width>241</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
      </property>
      <item>
       <property name="text">
@@ -254,6 +198,11 @@ border :2px solid black;
        <height>40</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Сложность</string>
      </property>
@@ -261,11 +210,16 @@ border :2px solid black;
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>30</x>
        <y>70</y>
-       <width>131</width>
+       <width>141</width>
        <height>40</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Тип задачи</string>
@@ -279,6 +233,11 @@ border :2px solid black;
        <width>240</width>
        <height>40</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
      </property>
      <property name="iconSize">
       <size>
@@ -311,6 +270,11 @@ border :2px solid black;
        <height>40</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Текст задачи</string>
      </property>
@@ -324,6 +288,11 @@ border :2px solid black;
        <height>40</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Тема задачи</string>
      </property>
@@ -336,6 +305,11 @@ border :2px solid black;
        <width>721</width>
        <height>120</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
      </property>
     </widget>
    </widget>
@@ -366,6 +340,11 @@ border :2px solid black;
        <height>60</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Добавить</string>
      </property>
@@ -388,6 +367,11 @@ border :2px solid black;
        <width>150</width>
        <height>60</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Обновить</string>
@@ -412,6 +396,11 @@ border :2px solid black;
        <height>60</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Выбрать</string>
      </property>
@@ -434,6 +423,11 @@ border :2px solid black;
        <width>150</width>
        <height>60</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Найти</string>
@@ -458,6 +452,11 @@ border :2px solid black;
        <height>60</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Очистить</string>
      </property>
@@ -480,6 +479,11 @@ border :2px solid black;
        <width>150</width>
        <height>60</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Удалить</string>
@@ -537,6 +541,11 @@ border :2px solid black;
        <width>960</width>
        <height>16777215</height>
       </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>
