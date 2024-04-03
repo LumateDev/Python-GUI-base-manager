@@ -5,6 +5,7 @@ from PySide6.QtGui import QIcon
 
 import database_manager
 from main_ui import Ui_MainWindow
+import qdarktheme
 
 
 class MainWindow(QWidget):
@@ -16,7 +17,6 @@ class MainWindow(QWidget):
         self.setFixedSize(960, 810)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
 
         self.connect = database_manager.sql_connection()
         self.task_id = self.ui.spinBoxId
@@ -36,6 +36,18 @@ class MainWindow(QWidget):
         self.result_table.setSortingEnabled(False)
         self.buttons_list = self.ui.function_frame.findChildren(QPushButton)
 
+        self.radioDark = self.ui.radioButtonDark
+        self.radioLight = self.ui.radioButtonLight
+
+        if app.styleSheet() == qdarktheme.load_stylesheet("dark"):
+            self.radioDark.setChecked(True)
+        else:
+            self.radioLight.setChecked(True)
+
+        """
+        call create_tables() here
+        """
+
         self.init_signal_slot()
         self.search_info()
         self.update_info()
@@ -48,18 +60,19 @@ class MainWindow(QWidget):
         self.button_remove.clicked.connect(self.delete_info)
         self.button_clear.clicked.connect(self.clear_form_info)
 
+        self.radioDark.toggled.connect(self.set_dark_theme)
+        self.radioLight.toggled.connect(self.set_light_theme)
+
     def update_info(self):
         print("Update button clicked")
 
     def add_info(self):
-        table_name = 'Новая_таблица'
-        column_names = ['Имя', 'Возраст', 'Город']
-        data_types = ['text', 'integer', 'text']
+
         print("Add button clicked")
         print(
             f"Data: {self.task_id.value()}, {self.task_type.currentText()}, {self.task_theme.currentText()}, {self.task_difficult.currentText()}, {self.task_text.toPlainText()}")
 
-        database_manager.create_tables(self.connect, table_name, column_names, data_types)
+
 
     def search_info(self):
         print("Search button clicked")
@@ -73,10 +86,18 @@ class MainWindow(QWidget):
     def delete_info(self):
         print("Delete button clicked")
 
+    def set_dark_theme(self):
+        app.setStyleSheet(qdarktheme.load_stylesheet("dark"))
+
+    def set_light_theme(self):
+        app.setStyleSheet(qdarktheme.load_stylesheet("light"))
+
 
 if __name__ == '__main__':
+
     app = QApplication(sys.argv)
-    app.setStyle("Fusion")
+    app.setStyleSheet(qdarktheme.load_stylesheet("dark"))
     window = MainWindow()
+    window.setWindowTitle("Database UI app")
     window.show()
     sys.exit(app.exec())

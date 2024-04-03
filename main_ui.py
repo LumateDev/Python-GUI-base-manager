@@ -16,9 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QFrame,
-    QHeaderView, QLabel, QMainWindow, QPlainTextEdit,
-    QPushButton, QSizePolicy, QSpinBox, QTabWidget,
-    QTableWidget, QTableWidgetItem, QWidget)
+    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
+    QMainWindow, QPlainTextEdit, QPushButton, QRadioButton,
+    QSizePolicy, QSpinBox, QTabWidget, QTableWidget,
+    QTableWidgetItem, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -36,17 +37,44 @@ class Ui_MainWindow(object):
         self.title_frame.setStyleSheet(u"")
         self.title_frame.setFrameShape(QFrame.StyledPanel)
         self.title_frame.setFrameShadow(QFrame.Raised)
-        self.title_label = QLabel(self.title_frame)
+        self.widget = QWidget(self.title_frame)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(0, 0, 941, 51))
+        self.gridLayout = QGridLayout(self.widget)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.title_label = QLabel(self.widget)
         self.title_label.setObjectName(u"title_label")
-        self.title_label.setGeometry(QRect(0, 0, 941, 61))
         font = QFont()
         font.setFamilies([u"Microsoft YaHei"])
-        font.setPointSize(28)
+        font.setPointSize(24)
         font.setBold(False)
         font.setItalic(False)
         self.title_label.setFont(font)
         self.title_label.setStyleSheet(u"")
         self.title_label.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout.addWidget(self.title_label, 0, 0, 1, 1)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.radioButtonDark = QRadioButton(self.widget)
+        self.radioButtonDark.setObjectName(u"radioButtonDark")
+        font1 = QFont()
+        font1.setPointSize(16)
+        self.radioButtonDark.setFont(font1)
+
+        self.horizontalLayout.addWidget(self.radioButtonDark)
+
+        self.radioButtonLight = QRadioButton(self.widget)
+        self.radioButtonLight.setObjectName(u"radioButtonLight")
+        self.radioButtonLight.setFont(font1)
+
+        self.horizontalLayout.addWidget(self.radioButtonLight)
+
+
+        self.gridLayout.addLayout(self.horizontalLayout, 0, 1, 1, 1)
+
         self.info_frame = QFrame(self.centralwidget)
         self.info_frame.setObjectName(u"info_frame")
         self.info_frame.setGeometry(QRect(10, 80, 941, 281))
@@ -61,8 +89,6 @@ class Ui_MainWindow(object):
         self.comboBoxDifficult.setObjectName(u"comboBoxDifficult")
         self.comboBoxDifficult.setEnabled(True)
         self.comboBoxDifficult.setGeometry(QRect(670, 20, 241, 41))
-        font1 = QFont()
-        font1.setPointSize(16)
         self.comboBoxDifficult.setFont(font1)
         self.comboBoxDifficult.setAutoFillBackground(False)
         self.label_2 = QLabel(self.info_frame)
@@ -267,6 +293,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.title_label.setText(QCoreApplication.translate("MainWindow", u"\u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f \u043e \u0437\u0430\u0434\u0430\u0447\u0430\u0445", None))
+        self.radioButtonDark.setText(QCoreApplication.translate("MainWindow", u"\u0422\u0451\u043c\u043d\u0430\u044f \u0442\u0435\u043c\u0430", None))
+        self.radioButtonLight.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0432\u0435\u0442\u043b\u0430\u044f \u0442\u0435\u043c\u0430", None))
         self.comboBoxDifficult.setItemText(0, QCoreApplication.translate("MainWindow", u"\u041b\u0435\u0433\u043a\u043e", None))
         self.comboBoxDifficult.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u044f\u044f", None))
         self.comboBoxDifficult.setItemText(2, QCoreApplication.translate("MainWindow", u"\u0421\u043b\u043e\u0436\u043d\u0430\u044f", None))

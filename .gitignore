@@ -1,4 +1,5 @@
-.idea
-.built
-.dist
+.idea/*
+build/*
+dist/*
+venv
 
