@@ -1,3 +1,4 @@
+import os.path
 import sys
 
 from PySide6.QtWidgets import QWidget, QApplication, QPushButton, QFrame, QMessageBox, QTableWidgetItem
@@ -19,6 +20,15 @@ class MainWindow(QWidget):
         self.ui.setupUi(self)
 
         self.connect = database_manager.sql_connection()
+        file_path = "TasksBase.DB"
+        flag = False
+        if os.path.isfile(file_path):
+            flag = True
+
+        database_manager.init_db(self.connect)
+        if not flag:
+            database_manager.init_db(self.connect)
+
         self.task_id = self.ui.spinBoxId
         self.task_type = self.ui.comboBoxType
         self.task_difficult = self.ui.comboBoxDifficult
@@ -65,17 +75,18 @@ class MainWindow(QWidget):
 
     def update_info(self):
         print("Update button clicked")
+        ## Получить все данные из таблиц и вывести в таблицу
 
     def add_info(self):
 
         print("Add button clicked")
         print(
             f"Data: {self.task_id.value()}, {self.task_type.currentText()}, {self.task_theme.currentText()}, {self.task_difficult.currentText()}, {self.task_text.toPlainText()}")
-
-
+        database_manager.add_task(self.connect, self.task_type.currentText(), self.task_theme.currentText(), self.task_text.toPlainText(), self.task_difficult.currentText())
 
     def search_info(self):
         print("Search button clicked")
+        ##хз
 
     def clear_form_info(self):
         print("Clear button clicked")
