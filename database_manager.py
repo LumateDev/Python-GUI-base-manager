@@ -115,18 +115,20 @@ def drop_all_tables(con: sqlite3.Connection):
     cursor_obj.close()
 
 
-# def get_all_tasks(con: sqlite3.Connection):
-#     """
-#     :param con: Соединение
-#     :return: Список задач
-#     """
-#     cursor_obj = con.cursor()
-#     cursor_obj.execute("""SELECT * FROM task""")
-#     tasks = []
-#     for row in cursor_obj.fetchall():
-#         tasks.append(Task(row[0], row[1], row[2], row[3], row[4]))
-#     cursor_obj.close()
-#     return tasks
+def get_all_tasks(con: sqlite3.Connection):
+     """
+     :param con: Соединение
+     :return: Список задач
+     """
+     cursor_obj = con.cursor()
+     cursor_obj.execute("""SELECT * FROM task""")
+     tasks = []
+     for row in cursor_obj.fetchall():
+         tasks.append([row[0], row[1], row[2], row[3], row[4]])
+     cursor_obj.close()
+     for i in tasks:
+         print(i)
+     return tasks
 
 
 # def get_task_by_id(con: sqlite3.Connection, id_task: int) -> Task:
@@ -146,6 +148,7 @@ def add_task(con: sqlite3.Connection, type_work, id_theme, task, difficult):
 
     level = 0
     id_type_work = 0
+    print(type_work)
     match difficult:
         case "Легко":
             level = 1
@@ -157,7 +160,7 @@ def add_task(con: sqlite3.Connection, type_work, id_theme, task, difficult):
             level = 4
 
     match type_work:
-        case "Домашнее задание":
+        case "Домашнee задание":
             id_type_work = 1
         case "Самостоятельная работа":
             id_type_work = 2

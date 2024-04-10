@@ -19,15 +19,17 @@ class MainWindow(QWidget):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.connect = database_manager.sql_connection()
+        #self.connect = database_manager.sql_connection()
         file_path = "TasksBase.DB"
         flag = False
         if os.path.isfile(file_path):
             flag = True
 
-        database_manager.init_db(self.connect)
+        self.connect = database_manager.sql_connection()
         if not flag:
             database_manager.init_db(self.connect)
+
+        database_manager.get_all_tasks(self.connect)
 
         self.task_id = self.ui.spinBoxId
         self.task_type = self.ui.comboBoxType
