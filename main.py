@@ -29,7 +29,7 @@ class MainWindow(QWidget):
         if not flag:
             database_manager.init_db(self.connect)
 
-        database_manager.get_all_tasks(self.connect)
+
 
         self.task_id = self.ui.spinBoxId
         self.task_type = self.ui.comboBoxType
@@ -50,6 +50,8 @@ class MainWindow(QWidget):
 
         self.radioDark = self.ui.radioButtonDark
         self.radioLight = self.ui.radioButtonLight
+        self.table = self.ui.tableWidget
+        self.table.setAutoScroll(True)
 
         if app.styleSheet() == qdarktheme.load_stylesheet("dark"):
             self.radioDark.setChecked(True)
@@ -66,7 +68,7 @@ class MainWindow(QWidget):
 
     def init_signal_slot(self):
         self.button_add.clicked.connect(self.add_info)
-        self.button_update.clicked.connect(self.update_info)
+        self.button_update.clicked.connect(self.edit_info())
         self.button_select.clicked.connect(self.select_info)
         self.button_search.clicked.connect(self.search_info)
         self.button_remove.clicked.connect(self.delete_info)
@@ -77,7 +79,18 @@ class MainWindow(QWidget):
 
     def update_info(self):
         print("Update button clicked")
-        ## Получить все данные из таблиц и вывести в таблицу
+        data = database_manager.get_all_tasks(self.connect)
+
+        for task in data:
+            item = QTableWidgetItem(str(task))
+            row_position = self.table.rowCount()
+            self.table.insertRow(row_position)
+            for idx, value in enumerate(task):
+                item = QTableWidgetItem(str(value))
+                self.table.setItem(row_position, idx, item)
+
+
+
 
     def add_info(self):
 
@@ -85,13 +98,26 @@ class MainWindow(QWidget):
         print(
             f"Data: {self.task_id.value()}, {self.task_type.currentText()}, {self.task_theme.currentText()}, {self.task_difficult.currentText()}, {self.task_text.toPlainText()}")
         database_manager.add_task(self.connect, self.task_type.currentText(), self.task_theme.currentText(), self.task_text.toPlainText(), self.task_difficult.currentText())
+        self.table.setRowCount(0)
+        self.update_info()
 
     def search_info(self):
         print("Search button clicked")
-        ##хз
+        """
+        Кароче, если в спинбоксе айди 0 или пусто, то нужно вывести всю таблицу если есть айдишник который сщуествует
+        то нужгно вывести эту запись
+        """
+
+
 
     def clear_form_info(self):
         print("Clear button clicked")
+        database_manager.drop_all_tables(self.connect)
+        self.table.setRowCount(0)
+        self.update_info()
+
+    def edit_info(self):
+        print("Edit button clicked")
 
     def select_info(self):
         print("Select button clicked")

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>957</width>
+    <width>960</width>
     <height>840</height>
    </rect>
   </property>
@@ -17,7 +17,9 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QTableWidget {
+	margin-bottom : 20px;
+}</string>
   </property>
   <property name="tabShape">
    <enum>QTabWidget::Rounded</enum>
@@ -696,45 +698,9 @@
      <attribute name="verticalHeaderStretchLastSection">
       <bool>false</bool>
      </attribute>
-     <row>
-      <property name="text">
-       <string>Новая строка</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>Новая строка</string>
-      </property>
-     </row>
      <column>
       <property name="text">
        <string>Id Задачи</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignLeading|AlignVCenter</set>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Тема задачи</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignLeading|AlignVCenter</set>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Сложность задачи</string>
       </property>
       <property name="font">
        <font>
@@ -760,6 +726,19 @@
      </column>
      <column>
       <property name="text">
+       <string>Тема задачи</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>Текст задачи</string>
       </property>
       <property name="font">
@@ -771,51 +750,19 @@
        <set>AlignLeading|AlignVCenter</set>
       </property>
      </column>
-     <item row="0" column="0">
+     <column>
       <property name="text">
-       <string>fdfd</string>
+       <string>Сложность задачи</string>
       </property>
-     </item>
-     <item row="0" column="1">
-      <property name="text">
-       <string>fdfd</string>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
       </property>
-     </item>
-     <item row="0" column="2">
-      <property name="text">
-       <string>fdfd</string>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
       </property>
-     </item>
-     <item row="0" column="3">
-      <property name="text">
-       <string>fdfdf</string>
-      </property>
-     </item>
-     <item row="0" column="4">
-      <property name="text">
-       <string>fdfdf</string>
-      </property>
-     </item>
-     <item row="1" column="0">
-      <property name="text">
-       <string>54</string>
-      </property>
-     </item>
-     <item row="1" column="1">
-      <property name="text">
-       <string>gdfg</string>
-      </property>
-     </item>
-     <item row="1" column="2">
-      <property name="text">
-       <string>gdgfdg</string>
-      </property>
-     </item>
-     <item row="1" column="3">
-      <property name="text">
-       <string>gdfgd</string>
-      </property>
-     </item>
+     </column>
     </widget>
    </widget>
    <zorder>function_frame</zorder>

@@ -113,6 +113,7 @@ def drop_all_tables(con: sqlite3.Connection):
     cursor_obj.execute("DROP TABLE IF EXISTS theme;")
     con.commit()
     cursor_obj.close()
+    init_db(con)
 
 
 def get_all_tasks(con: sqlite3.Connection):
@@ -154,7 +155,7 @@ def add_task(con: sqlite3.Connection, type_work, id_theme, task, difficult):
             level = 1
         case "Средняя":
             level = 2
-        case "Cложная":
+        case "Сложная":
             level = 3
         case "Хард":
             level = 4
