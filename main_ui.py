@@ -25,12 +25,12 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(960, 840)
+        MainWindow.resize(799, 840)
         MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet(u"QTableWidget {\n"
 "	margin-bottom : 20px;\n"
 "}")
-#        MainWindow.setTabShape(QTabWidget.Rounded)
+        #MainWindow.setTabShape(QTabWidget.Rounded)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.title_frame = QFrame(self.centralwidget)
@@ -101,6 +101,7 @@ class Ui_MainWindow(object):
         self.spinBoxId.setObjectName(u"spinBoxId")
         self.spinBoxId.setGeometry(QRect(190, 20, 240, 40))
         self.spinBoxId.setFont(font1)
+        self.spinBoxId.setMaximum(9999999)
         self.comboBoxTheme = QComboBox(self.info_frame)
         self.comboBoxTheme.addItem("")
         self.comboBoxTheme.addItem("")
@@ -265,7 +266,7 @@ class Ui_MainWindow(object):
         self.tableWidget.verticalHeader().setHighlightSections(True)
         self.tableWidget.verticalHeader().setProperty("showSortIndicator", False)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-#        MainWindow.setCentralWidget(self.centralwidget)
+        #MainWindow.setCentralWidget(self.centralwidget)
         self.function_frame.raise_()
         self.title_frame.raise_()
         self.info_frame.raise_()

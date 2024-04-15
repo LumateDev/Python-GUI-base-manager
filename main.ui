@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
+    <width>799</width>
     <height>840</height>
    </rect>
   </property>
@@ -195,6 +195,9 @@
       <font>
        <pointsize>16</pointsize>
       </font>
+     </property>
+     <property name="maximum">
+      <number>9999999</number>
      </property>
     </widget>
     <widget class="QComboBox" name="comboBoxTheme">

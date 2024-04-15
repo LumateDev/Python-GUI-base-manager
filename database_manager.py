@@ -132,17 +132,17 @@ def get_all_tasks(con: sqlite3.Connection):
      return tasks
 
 
-# def get_task_by_id(con: sqlite3.Connection, id_task: int) -> Task:
-#     """
-#     :param con: Соединение
-#     :param id_task: Идентификатор задачи
-#     :return: Задача
-#     """
-#     cursor_obj = con.cursor()
-#     cursor_obj.execute("""SELECT * FROM task WHERE id_task = ?""", (id_task,))
-#     task = cursor_obj.fetchone()
-#     cursor_obj.close()
-#     return Task(task[0], task[1], task[2], task[3], task[4])
+def get_task_by_id(con: sqlite3.Connection, id_task: int) -> list:
+    """
+    :param con: Соединение
+    :param id_task: Идентификатор задачи
+    :return: Задача
+    """
+    cursor_obj = con.cursor()
+    cursor_obj.execute("""SELECT * FROM task WHERE id_task = ?""", (id_task,))
+    task = cursor_obj.fetchone()
+    cursor_obj.close()
+    return [task[0], task[1], task[2], task[3], task[4]]
 
 
 def add_task(con: sqlite3.Connection, type_work, id_theme, task, difficult):
@@ -184,7 +184,30 @@ def delete_task(con: sqlite3.Connection, id_task: int):
     cursor_obj.close()
 
 
-def update_task(con: sqlite3.Connection, id_task, id_type_work, id_theme, task, level):
+def update_task(con: sqlite3.Connection, id_task, type_work, id_theme, task, difficult):
+    level = 0
+    id_type_work = 0
+    print(type_work)
+    match difficult:
+        case "Легко":
+            level = 1
+        case "Средняя":
+            level = 2
+        case "Сложная":
+            level = 3
+        case "Хард":
+            level = 4
+
+    match type_work:
+        case "Домашнee задание":
+            id_type_work = 1
+        case "Самостоятельная работа":
+            id_type_work = 2
+        case "Контрольная работа":
+            id_type_work = 3
+
+    print(id_type_work, id_theme, task, level)
+
     cursor_obj = con.cursor()
     cursor_obj.execute("""UPDATE task SET id_type_work = ?, id_theme = ?, task = ?, level = ? 
                             WHERE id_task = ?""",

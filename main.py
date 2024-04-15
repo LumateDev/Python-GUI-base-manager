@@ -1,7 +1,7 @@
 import os.path
 import sys
 
-from PySide6.QtWidgets import QWidget, QApplication, QPushButton, QFrame, QMessageBox, QTableWidgetItem
+from PySide6.QtWidgets import QWidget, QApplication, QPushButton, QMessageBox, QTableWidgetItem
 from PySide6.QtGui import QIcon
 
 import database_manager
@@ -19,7 +19,6 @@ class MainWindow(QWidget):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        #self.connect = database_manager.sql_connection()
         file_path = "TasksBase.DB"
         flag = False
         if os.path.isfile(file_path):
@@ -28,8 +27,6 @@ class MainWindow(QWidget):
         self.connect = database_manager.sql_connection()
         if not flag:
             database_manager.init_db(self.connect)
-
-
 
         self.task_id = self.ui.spinBoxId
         self.task_type = self.ui.comboBoxType
@@ -52,23 +49,19 @@ class MainWindow(QWidget):
         self.radioLight = self.ui.radioButtonLight
         self.table = self.ui.tableWidget
         self.table.setAutoScroll(True)
+        self.data = []
 
         if app.styleSheet() == qdarktheme.load_stylesheet("dark"):
             self.radioDark.setChecked(True)
         else:
             self.radioLight.setChecked(True)
 
-        """
-        call create_tables() here
-        """
-
         self.init_signal_slot()
-        self.search_info()
         self.update_info()
 
     def init_signal_slot(self):
         self.button_add.clicked.connect(self.add_info)
-        self.button_update.clicked.connect(self.edit_info())
+        self.button_update.clicked.connect(self.edit_info)
         self.button_select.clicked.connect(self.select_info)
         self.button_search.clicked.connect(self.search_info)
         self.button_remove.clicked.connect(self.delete_info)
@@ -78,10 +71,9 @@ class MainWindow(QWidget):
         self.radioLight.toggled.connect(self.set_light_theme)
 
     def update_info(self):
-        print("Update button clicked")
-        data = database_manager.get_all_tasks(self.connect)
+        self.data = database_manager.get_all_tasks(self.connect)
 
-        for task in data:
+        for task in self.data:
             item = QTableWidgetItem(str(task))
             row_position = self.table.rowCount()
             self.table.insertRow(row_position)
@@ -89,41 +81,92 @@ class MainWindow(QWidget):
                 item = QTableWidgetItem(str(value))
                 self.table.setItem(row_position, idx, item)
 
-
-
-
     def add_info(self):
 
-        print("Add button clicked")
-        print(
-            f"Data: {self.task_id.value()}, {self.task_type.currentText()}, {self.task_theme.currentText()}, {self.task_difficult.currentText()}, {self.task_text.toPlainText()}")
-        database_manager.add_task(self.connect, self.task_type.currentText(), self.task_theme.currentText(), self.task_text.toPlainText(), self.task_difficult.currentText())
-        self.table.setRowCount(0)
-        self.update_info()
+        if not (self.task_type.currentText() and self.task_theme.currentText() and self.task_difficult.currentText() and self.task_text.toPlainText()):
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setInformativeText("Заполните все поля")
+            msg.setWindowTitle("Error")
+            msg.exec_()
+        else:
+            database_manager.add_task(self.connect, self.task_type.currentText(), self.task_theme.currentText(), self.task_text.toPlainText(), self.task_difficult.currentText())
+            self.table.setRowCount(0)
+            self.update_info()
 
     def search_info(self):
-        print("Search button clicked")
-        """
-        Кароче, если в спинбоксе айди 0 или пусто, то нужно вывести всю таблицу если есть айдишник который сщуествует
-        то нужгно вывести эту запись
-        """
 
+        row_index = self.task_id.value()
+        if not row_index:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setInformativeText('Необходимо указать ID')
+            msg.setWindowTitle("Error")
+            msg.exec_()
+        if len(self.data) < row_index:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setInformativeText(f"Записи с {row_index} не существует ")
+            msg.setWindowTitle("Error")
+            msg.exec_()
 
+        column = 0
+        index = self.table.model().index(row_index-1, column)
+        self.table.scrollTo(index)
+        self.table.setCurrentCell(row_index,0)
 
     def clear_form_info(self):
-        print("Clear button clicked")
+
         database_manager.drop_all_tables(self.connect)
         self.table.setRowCount(0)
         self.update_info()
 
     def edit_info(self):
-        print("Edit button clicked")
+
+        if not (self.task_id.value() and self.task_type.currentText() and self.task_theme.currentText() and self.task_difficult.currentText() and self.task_text.toPlainText()):
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setInformativeText("Заполните все поля")
+            msg.setWindowTitle("Error")
+            msg.exec_()
+        else:
+
+            database_manager.update_task(self.connect,self.task_id.value(), self.task_type.currentText(), self.task_theme.currentText(),
+                                  self.task_text.toPlainText(), self.task_difficult.currentText())
+            self.table.setRowCount(0)
+            self.update_info()
 
     def select_info(self):
-        print("Select button clicked")
+        row = self.table.currentIndex().row()
+        active_row_index = self.table.model().index(row, 0).data()
+        print(active_row_index)
+        data_by_id = database_manager.get_task_by_id(self.connect, active_row_index)
+        print(data_by_id)
+
+        self.task_id.setValue(data_by_id[0])
+        self.task_type.setCurrentIndex(data_by_id[1]-1)
+        self.task_theme.setCurrentIndex(data_by_id[2]-1)
+        self.task_text.setPlainText(data_by_id[3])
+        self.task_difficult.setCurrentIndex(data_by_id[4]-1)
 
     def delete_info(self):
-        print("Delete button clicked")
+
+        if not self.task_id.value():
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setInformativeText("Укажите запись, которую нужно удалить")
+            msg.setWindowTitle("Error")
+            msg.exec_()
+
+        else:
+            database_manager.delete_task(self.connect, self.task_id.value())
+            self.table.setRowCount(0)
+            self.update_info()
+            self.task_id.setValue(0)
+            self.task_type.setCurrentIndex(0)
+            self.task_theme.setCurrentIndex(0)
+            self.task_text.setPlainText("")
+            self.task_difficult.setCurrentIndex(0)
 
     def set_dark_theme(self):
         app.setStyleSheet(qdarktheme.load_stylesheet("dark"))
